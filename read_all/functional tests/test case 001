@@ -1,0 +1,61 @@
+# Test
+
+All good scenario as per specification.
+
+# Precondition
+
+Check the Reuse db if the record (you want to update) exists already
+
+# Input Specification
+
+Request:
+
+URL: `v1/customers/{customerId}`
+(current example: `v1/customers/8834`)
+Body:
+```
+{
+"firstName":"Hello", 
+"lastName":"Example", 
+"email":"hello.example@domain.com" , 
+"street": "Madison Square", 
+"streetNo": "2",
+"zip": "10014", 
+"city": "New York", 
+"phone": "0018651845668"
+}
+```
+
+# Expected Outcomes
+
+1) Response :
+
+HTTP code : `200 OK`
+Body :
+```
+{
+"firstName":"Hello", 
+"lastName":"Example", 
+"email":"hello.example@domain.com" , 
+"street": "Madison Square", 
+"streetNo": "2",
+"zip": "10014", 
+"city": "New York", 
+"phone": "0018651845668"
+"id": 8834
+}
+```
+
+
+# Pass/Fail Criteria
+
+**Pass:** The customer has been changed.\
+**Fail:** No change happened.
+**Fail:** The ID in the response body doesn't match the request, which means either another record was updated or new record created.
+
+# Test Procedure
+
+1. HTTP Rest call to deployed service. 
+2. API Call "read_digital_contact_by_id" to retrieve changed customer.
+3. Compare both results, must be the same.
+4. Compare results with original one, must be different.
